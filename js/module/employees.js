@@ -38,13 +38,13 @@ export const getBossFullNameAndEmail = async() =>{
 export const getAllFullNamePositionDiferentSalesRepresentative = async() =>{
     let res=await fetch("http://localhost:5502/employee?position_ne=Representante Ventas")
     let data =await res.json();
-    let dataUpdate = {}
+    let dataUpdate = []
     data.forEach(val => {
         if(val.code_boss != null){
-            dataUpdate.push({
-                name: val.name,
-                fullLastname: '${val.lastname1} ${val.lastname2}',
-                position: val.position,
+                dataUpdate.push({
+                    name: val.name,
+                    fullLastname: `${val.lastname1} ${val.lastname2}`,
+                    position: val.position,
             })
         }
     });

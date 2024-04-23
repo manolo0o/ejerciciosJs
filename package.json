@@ -1,16 +1,18 @@
 {
   "name": "ejerciciosjs",
   "version": "1.0.0",
-  "description": "",
+  "description": "--",
   "main": "js/main.js",
   "type": "module",
   "scripts": {
-    "dev": "node js/main.js"
+    "dev": "node --watch js/main.js",
+    "server": "json-server js/db/clients.json -p 5501 & json-server js/db/employees.json -p 5502 & json-server js/db/delivery_details.json -p 5503 & json-server js/db/gama.json -p 5504 & json-server js/db/office.json -p 5505 & json-server js/db/payments.json -p 5506 & json-server js/db/product.json -p 5507 & json-server js/db/request.json -p 5508"   
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async-prompt": "^1.0.1"
+    "async-prompt": "^1.0.1",
+    "json-server": "^1.0.0-alpha.23"
   }
 }
