@@ -50,3 +50,5 @@ export const getAllFullNamePositionDiferentSalesRepresentative = async() =>{
     });
     return dataUpdate
 }
+
+// Obtener toda la informacion del empleado por codigo
