@@ -9,13 +9,15 @@ import prompt from 'async-prompt'
 //console.log(await getBossFullNameAndEmail());
 //console.log(await getAllFullNamePositionDiferentSalesRepresentative())
 
-// import { 
-//     getAllFullNameSpanishClients
-// } from "./module/clients.js";
-
-// console.log(await getAllFullNameSpanishClients())
+//import { getAllClientsfromSpain} from "./module/clients.js";
+//console.log(await getAllClientsfromSpain())
 
 
- import { getAllRequestStatus, getAllStatus} from "./module/request.js";
+//import { getAllRequestStatus, getAllStatus} from "./module/request.js";
+//console.log(await getAllStatus());
 
-console.log(await getAllStatus());
+
+import { getClientPayments_At_2008 } from "./module/payments.js"
+console.log(await getClientPayments_At_2008())
+
+
