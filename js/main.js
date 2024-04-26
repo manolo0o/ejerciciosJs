@@ -19,8 +19,8 @@ import prompt from 'async-prompt'
 //console.log(await getAll_Request_From_January ());
 
 
-import { getClientPayments_At_2008, getAll_Type_Of_Payments} from "./module/payments.js"
-console.log(await getAll_Type_Of_Payments())
+//import { getClientPayments_At_2008, getAll_Type_Of_Payments} from "./module/payments.js"
+//console.log(await getAll_Type_Of_Payments())
 
-
-
+import {getAll_OrnamentalProducts} from "./module/product.js"
+console.log(await getAll_OrnamentalProducts())
