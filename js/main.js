@@ -2,17 +2,20 @@ import prompt from 'async-prompt'
 
 //import { 
 //    getAllFullNameAndEmailsAndBoss,
-//    getBossFullNameAndEmail, getAllFullNamePositionDiferentSalesRepresentative
+//    getBossFullNameAndEmail, getAllFullNamePositionDiferentSalesRepresentative,
+//    getEmployeesByCode
 //} 
 //from "./module/employees.js";
 
+//console.log (await getEmployeesByCode())
 // console.log(await getAllFullNameAndEmailsAndBoss())
 //console.log(await getBossFullNameAndEmail());
 //console.log(await getAllFullNamePositionDiferentSalesRepresentative())
 
-import { getAllClientsfromSpain, getClients_From_Madrid} 
+import { getAllClientsfromSpain, getClients_From_Madrid, 
+        get_FullNameClients_And_SalesManager} 
 from "./module/clients.js";
-console.log(await getClients_From_Madrid())
+console.log(await get_FullNameClients_And_SalesManager())
 
 
 //import { getAllStatus, getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime,
