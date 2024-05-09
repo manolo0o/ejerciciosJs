@@ -57,3 +57,10 @@ export const getAll_Type_Of_Payments = async() =>{
     let uniqueStatusMethodsArray = Array.from(uniqueStatusMethods)
     return uniqueStatusMethodsArray;
 }
+
+//Obtener el pago de algun cliente mediante codigo
+export const getPaymentByClientCode = async (code = "") => {
+    let res = await fetch(`http://localhost:5505/payments?code_client=${code}`);
+    let data = await res.json();
+    return data;
+}

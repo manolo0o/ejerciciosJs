@@ -1,8 +1,8 @@
 import { 
     getAllClientsfromSpain, 
     getClients_From_Madrid,
-    get_FullNameClients_And_SalesManager
-
+    get_FullNameClients_And_SalesManager,
+    getAllClientNameAndSalesManagerWithPayment
 } from "../module/clients.js";
 //import {
  //   getAllEmployNotClients 
@@ -54,23 +54,36 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
-    async getAllEmployNotClientsDesign(){
-        let data = await getAllEmployNotClients();
+    async get_FullNameClients_And_SalesManager(){
+        let data = await get_FullNameClients_And_SalesManager();
         data.forEach(val => {
             this.shadowRoot.innerHTML += /*html*/`
-            
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.name} ${val.lastname1} ${val.lastname2} # ${val.employee_code}</div>
+                        <div>${val.client_name}</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
-                            <p><b>Id: </b> ${val.id}</p>
-                            <p><b>Cargo: </b>${val.position}</p>
-                            <p><b>Oficina: </b>${val.code_office}</p>
-                            <p><b>Jefe encargado: </b>${val.name_boss}</p>
-                            <p><b>Numero de extencion: </b>${val.extension}</p>
-                            <p><b>Correo electronico: </b>${val.email}</p>
+                            <p><b>Client Name: </b> ${val.client_name}</p>
+                            <p><b>Manager Fullname: </b>${val.Manager_name}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllClientNameAndSalesManagerWithPayment(){
+        let data = await getAllClientNameAndSalesManagerWithPayment();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.Client_name}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Client Name: </b> ${val.Client_name}</p>
+                            <p><b>Manager Fullname: </b>${val.Manager_name}</p>
                         </div>
                     </div>
                 </div>
@@ -83,6 +96,8 @@ export class Mycard extends HTMLElement{
     attributeChangedCallback(name, old, now) {
         if(name=="logic" && now=="client_6") this.getAllClientsfromSpain()
         if(name=="logic" && now=="client_16") this.getClients_From_Madrid()
-        if(name=="logic" && now=="employ_12") this.getAllEmployNotClientsDesign()
+        if(name=="logic" && now=="client_1") this.get_FullNameClients_And_SalesManager()
+        if(name=="logic" && now== "client_2")this.getAllClientNameAndSalesManagerWithPayment()
+
     }
 }

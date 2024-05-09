@@ -13,7 +13,8 @@
     import { 
         getAllClientsfromSpain,
         getClients_From_Madrid,
-        get_FullNameClients_And_SalesManager
+        get_FullNameClients_And_SalesManager,
+        getAllClientNameAndSalesManagerWithPayment
     } from "./module/clients.js";
     
-    console.log(await getClients_From_Madrid());
+    console.log(await getAllClientNameAndSalesManagerWithPayment());
