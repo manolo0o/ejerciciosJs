@@ -20,9 +20,9 @@ export class Mydetails extends HTMLElement{
                 </div>
             </details>
         `;
-        this.myCard = this.shadowRoot.querySelector("my-card")
+        this.myCard = this.shadowRoot.querySelector("my-card");
         this.marquee = this.shadowRoot.querySelector("marquee");
-        this.details = this.shadowRoot.querySelector("details")
+        this.details = this.shadowRoot.querySelector("details");
     }
 
     connectedCallback(){
