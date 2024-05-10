@@ -18,6 +18,8 @@ btn.forEach(val =>{
                 <my-details logic="client_1" text="1.Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas."></my-details>
                 <my-details logic="client_2" text="2. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas."></my-details>
                 <my-details logic="client_3" text="3. Muestra el nombre de los clientes que no hayan realizado pagos junto con el nombre de sus representantes de ventas."></my-details>
+                <my-details logic="client_4" text="4.Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la  ciudad de la oficina a la que pertenece el representante.."></my-details>
+
             `
         }
         if(e.target.innerHTML=="employees"){
