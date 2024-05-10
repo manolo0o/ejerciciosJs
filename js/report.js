@@ -14,9 +14,10 @@ btn.forEach(val =>{
         if(e.target.innerHTML=="clients"){
             report__details.innerHTML = /*html*/`
                 <my-details logic="client_6" text="6.Devuelve un listado con el nombre de los todos los clientes españoles."></my-details>
-                <my-details logic="client_16" text="16. Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30."></my-details>
+                <my-details logic="client_16"text="16. Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30."></my-details>
                 <my-details logic="client_1" text="1.Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas."></my-details>
                 <my-details logic="client_2" text="2. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas."></my-details>
+                <my-details logic="client_3" text="3. Muestra el nombre de los clientes que no hayan realizado pagos junto con el nombre de sus representantes de ventas."></my-details>
             `
         }
         if(e.target.innerHTML=="employees"){

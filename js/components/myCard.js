@@ -2,7 +2,8 @@ import {
     getAllClientsfromSpain, 
     getClients_From_Madrid,
     get_FullNameClients_And_SalesManager,
-    getAllClientNameAndSalesManagerWithPayment
+    getAllClientNameAndSalesManagerWithPayment,
+    getAllClientNameAndSalesManagerWithoutPayment
 } from "../module/clients.js";
 //import {
  //   getAllEmployNotClients 
@@ -90,14 +91,33 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
-    static get observedAttributes() {
-        return ["logic"];
-    }
+    async getAllClientNameAndSalesManagerWithoutPayment(){
+        let data = await getAllClientNameAndSalesManagerWithoutPayment();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.Client_name}</div>
+                    </div>
+                        <div class="card__body">
+                            <div class="body__marck">
+                                    <p><b>Client Name: </b> ${val.Client_name}</p>
+                                    <p><b>Manager Fullname: </b>${val.Manager_name}</p>
+                                    <p><b>payment: </b>not valid</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            static get observedAttributes() {
+                return ["logic"];
+            }
     attributeChangedCallback(name, old, now) {
         if(name=="logic" && now=="client_6") this.getAllClientsfromSpain()
         if(name=="logic" && now=="client_16") this.getClients_From_Madrid()
         if(name=="logic" && now=="client_1") this.get_FullNameClients_And_SalesManager()
         if(name=="logic" && now== "client_2")this.getAllClientNameAndSalesManagerWithPayment()
-
+        if(name=="logic" && now== "client_3")this.getAllClientNameAndSalesManagerWithoutPayment()
     }
 }
