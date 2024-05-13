@@ -3,7 +3,12 @@ import {
     getClients_From_Madrid,
     get_FullNameClients_And_SalesManager,
     getAllClientNameAndSalesManagerWithPayment,
-    getAllClientNameAndSalesManagerWithoutPayment
+    getAllClientNameAndSalesManagerWithoutPayment,
+    getAllAlreadyClientsPaymentsAndManagerOffices,
+    getAllNotAlreadyClientsPaymentsAndManagerOffices,
+    getAllOfficeswithFuenlabradaClients,
+    getAll,
+    getAllClientsWithALateDeliveryArrive
 } from "../module/clients.js";
 //import {
  //   getAllEmployNotClients 
@@ -110,14 +115,118 @@ export class Mycard extends HTMLElement{
                     `;
                 });
             }
+    async getAllAlreadyClientsPaymentsAndManagerOffices(){
+        let data = await getAllAlreadyClientsPaymentsAndManagerOffices();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.Client_name}</div>
+                    </div>
+                        <div class="card__body">
+                            <div class="body__marck">
+                                    <p><b>Client Name: </b> ${val.Client_name}</p>
+                                    <p><b>Manager Fullname: </b>${val.Manager_name}</p>
+                                    <p><b>Manager_city: </b>${val.Manager_city}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+    async getAllNotAlreadyClientsPaymentsAndManagerOffices(){
+        let data = await getAllNotAlreadyClientsPaymentsAndManagerOffices();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.Client_name}</div>
+                    </div>
+                        <div class="card__body">
+                            <div class="body__marck">
+                                    <p><b>Client Name: </b> ${val.client_name}</p>
+                                    <p><b>Manager Fullname: </b>${val.Manager_name}</p>
+                                    <p><b>Manager city: </b>${val.city}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+    async getAllOfficeswithFuenlabradaClients(){
+        let data = await getAllOfficeswithFuenlabradaClients();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.cliente}</div>
+                    </div>
+                        <div class="card__body">
+                            <div class="body__marck">
+                                    <p><b>Client Name: </b> ${val.cliente}</p>
+                                    <p><b>Manager Fullname: </b>${val.encargado}</p>
+                                    <p><b>Office: </b>${val.oficina}</p>
+                                    <p><b>Office adress: </b>${val.direccionOficina}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+    async getAll(){
+        let data = await getAll();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name}</div>
+                    </div>
+                        <div class="card__body">
+                            <div class="body__marck">
+                                    <p><b>Client Name: </b> ${val.client_name}</p>
+                                    <p><b>Manager Fullname: </b>${val.employees_full_name}</p>
+                                    <p><b>Office code: </b>${val.employees_office_code}</p>
+                                    <p><b>city: </b>${val.city_client}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+    async getAllClientsWithALateDeliveryArrive(){
+        let data = await getAllClientsWithALateDeliveryArrive();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.Client_Name}</div>
+                    </div>
+                        <div class="card__body">
+                            <div class="body__marck">
+                                    <p><b>Client Name: </b> ${val.Client_Name}</p>
+                                    <p><b>Stimate date: </b>${val.diaEsperado}</p>
+                                    <p><b>Delivery date:</b>${val.Fecha_Entregada}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
             static get observedAttributes() {
                 return ["logic"];
             }
+
     attributeChangedCallback(name, old, now) {
-        if(name=="logic" && now=="client_6") this.getAllClientsfromSpain()
-        if(name=="logic" && now=="client_16") this.getClients_From_Madrid()
-        if(name=="logic" && now=="client_1") this.get_FullNameClients_And_SalesManager()
-        if(name=="logic" && now== "client_2")this.getAllClientNameAndSalesManagerWithPayment()
-        if(name=="logic" && now== "client_3")this.getAllClientNameAndSalesManagerWithoutPayment()
+        if(name=="logic" && now=="client_1")this.getAllClientsfromSpain()
+        if(name=="logic" && now=="client_2")this.getClients_From_Madrid()
+        if(name=="logic" && now=="client_3")this.get_FullNameClients_And_SalesManager()
+        if(name=="logic" && now== "client_4")this.getAllClientNameAndSalesManagerWithPayment()
+        if(name=="logic" && now== "client_5")this.getAllClientNameAndSalesManagerWithoutPayment()
+        if(name=="logic" && now== "client_6")this.getAllAlreadyClientsPaymentsAndManagerOffices()    
+        if(name=="logic" && now== "client_7")this.getAllNotAlreadyClientsPaymentsAndManagerOffices()
+        if(name=="logic" && now== "client_8")this.getAllOfficeswithFuenlabradaClients()   
+        if(name=="logic" && now== "client_9")this.getAll()
+        if(name=="logic" && now== "client_10")this.getAllClientsWithALateDeliveryArrive()
+        
     }
 }

@@ -3,10 +3,15 @@ import {
     getClients_From_Madrid,
     get_FullNameClients_And_SalesManager,
     getAllClientNameAndSalesManagerWithPayment,
-    getAllClientNameAndSalesManagerWithoutPayment,    
+    getAllClientNameAndSalesManagerWithoutPayment, 
+    getAllAlreadyClientsPaymentsAndManagerOffices,
+    getAllNotAlreadyClientsPaymentsAndManagerOffices,
+    getAllOfficeswithFuenlabradaClients,
+    getAll,
+    getAllClientsWithALateDeliveryArrive
 } from "./module/clients.js";
 
-console.log(await getAllClientNameAndSalesManagerWithoutPayment());
+console.log(await getAllClientsWithALateDeliveryArrive());
 
 //import { 
     //    getAllOfficesCodeAndCity, 

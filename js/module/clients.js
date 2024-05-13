@@ -1,5 +1,7 @@
 //------------------------------------------------------------------------------
-import { getEmployeesByCode } from './employees.js'; import { getPaymentByClientCode } from './payments.js';
+import { getEmployeesByCode } from './employees.js'; import { getPaymentByClientCode } from './payments.js'; 
+import { getOfficesByCode } from './office.js'; import {getAllOrdersByClientCode} from './request.js' ;
+
 
 //------------------------------------------------------------------------------
 
@@ -93,4 +95,152 @@ export const getAllClientNameAndSalesManagerWithoutPayment = async () => {
     return dataUpdate
 }
 //-------------------------------------------------------------------------------
+// 4.Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la 
+// ciudad de la oficina a la que pertenece el representante.
 
+
+export const  getAllAlreadyClientsPaymentsAndManagerOffices = async () => {
+    let clients = await getAllClientNameAndSalesManagerWithPayment();
+    let dataUpdate = [];
+    for (const client of clients){
+        let [dataEmployee] = await getEmployeesByCode(client.Manager_Code);
+        let [offices] = await getOfficesByCode(dataEmployee.code_office);
+        if(!dataUpdate.some(elmt => elmt.Client_name == client.Client_name)){
+            dataUpdate.push({
+                Client_name: client.Client_name,
+                Manager_name: `${dataEmployee.name} ${dataEmployee.lastname1} ${dataEmployee.lastname2}`,
+                Manager_city: offices.city
+            })
+        }
+    }
+    return dataUpdate;
+}
+//-------------------------------------------------------------------------------
+// 5.Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes 
+// junto con la ciudad de la oficina a la que pertenece el representante.
+
+export const getAllNotAlreadyClientsPaymentsAndManagerOffices = async () =>{
+    let clients = await getAllClientNameAndSalesManagerWithoutPayment();
+    let dataUpdate = [];
+    for (const client of clients) {
+        let [dataEmployee] = await getEmployeesByCode(client.Manager_Code);
+        let [offices] =  await getOfficesByCode(dataEmployee.code_office);
+        if(!dataUpdate.some(elmt => elmt.Client_name == client.Client_name)){
+            dataUpdate.push({
+                client_name: client.Client_name,
+                Manager_name: `${dataEmployee.name} ${dataEmployee.lastname1} ${dataEmployee.lastname2}`,
+                city: offices.city
+            });
+        }
+    }
+    return dataUpdate;
+}
+//-------------------------------------------------------------------------------
+// 6 Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
+
+export const getAllOfficeswithFuenlabradaClients = async() =>{
+    let res = await fetch ("http://localhost:5501/clients?city=Fuenlabrada").then(res => res.json());
+    let dataUpdate = [];
+    for (const val of res) {
+        let [employee] = await getEmployeesByCode(val.code_employee_sales_manager)
+        let { code_office } = employee
+        let [officeDirection] = await getOfficesByCode(code_office)
+        dataUpdate.push({
+            cliente: val.client_name,
+            encargado: `${employee.name} ${employee.lastname1} ${employee.lastname2}`,
+            oficina: code_office,
+            direccionOficina:`${officeDirection.address1} ${officeDirection.address2}`
+        });
+    }
+    return dataUpdate;
+}
+
+//-------------------------------------------------------------------------------
+// 7. Devuelve el nombre de los clientes y el nombre de sus representantes
+// junto con la ciudad de la oficina a la que pertenece el representante.
+
+export const getAll = async () => {
+    let res = await fetch("http://localhost:5501/clients")
+    let client = await res.json();
+    for (let i = 0; i < client.length; i++) {
+
+        let {
+            id: id_client,
+            limit_credit,
+            postal_code: postal_code_client,
+            country: country_client,
+            region: region_client,
+            city,
+            address2: address2_client,
+            address1: address1_client,
+            fax,
+            phone,
+            ...clientUpdate } = client[i]
+        client[i] = clientUpdate
+        let [employee] = await getEmployeesByCode(clientUpdate.code_employee_sales_manager)
+
+        let {
+            id: id_employee,
+            extension,
+            email,
+            code_boss,
+            position,
+            ...employeeUpdate
+        } = employee
+        let [office] = await getOfficesByCode(employeeUpdate.code_office)
+        let {
+            id: id_office,
+            country,
+            region,
+            postal_code,
+            movil,
+            address1,
+            address2,
+            ...officeUpdate
+        } = office
+        let data = { ...clientUpdate, ...employeeUpdate, ...officeUpdate }
+        client[i] = {
+            client_name: `${data.client_name}`,
+            employees_full_name: `${data.name} ${data.lastname1} ${data.lastname2}`,
+            employees_office_code: data.code_office,
+            city_client: data.city
+        }
+    }
+    return client;
+}
+
+//-------------------------------------------------------------------------------
+// 10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
+
+export const getAllClientsWithALateDeliveryArrive = async ()=>{
+    let res = await fetch("http://localhost:5501/clients").then(res => res.json());
+    let dataUpdate = res.map(async(val) => {
+        let pedido = await getAllOrdersByClientCode (val.client_code);
+        let devData = []
+        pedido.forEach(elmt => {
+            if(elmt.date_delivery == null) return
+            let stimateDt = elmt.date_wait
+            let arriveDt = elmt.date_delivery
+            stimateDt = stimateDt.split("-")
+            arriveDt = arriveDt.split("-")
+            let mesEsperado = Number(stimateDt[stimateDt.length - 2])
+            let mesEntregado = Number(arriveDt[arriveDt.length - 2])
+            let diaEsperado = Number (stimateDt[stimateDt.length - 1])
+            let diaEntregado = Number (arriveDt[arriveDt.length - 1])
+            if ((mesEntregado > mesEsperado)|| (mesEntregado == mesEsperado && diaEntregado > diaEsperado)){
+                devData.push({
+                    Client_Name : val.client_name,
+                    Fecha_Estimada : stimateDt.join("-"),
+                    Fecha_Entregada :arriveDt.join("-"),
+                })
+            } 
+        })  
+        return devData;
+    })
+
+    let newArr = await Promise.all(dataUpdate)
+    newArr = newArr.filter(respo => respo.length > 0)
+    return newArr
+}
+
+//-------------------------------------------------------------------------------
