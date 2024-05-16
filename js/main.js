@@ -8,15 +8,20 @@ import {
     getAllNotAlreadyClientsPaymentsAndManagerOffices,
     getAllOfficeswithFuenlabradaClients,
     getAll,
-    getAllClientsWithALateDeliveryArrive
+    getAllClientsWithALateDeliveryArrive,
+    getAllClientsWhoHaventPaid,
+    getAllClientsWhoHaventRequest,
+    getAllClientsWhoHaveNeitherPaidNorRequest,
+    getAllClientsWhoHaveRequestedButHaventPaid
 } from "./module/clients.js";
 
-console.log(await getAllClientsWithALateDeliveryArrive());
+console.log(await getAllClientsWhoHaventRequest()); 
 
-//import { 
-    //    getAllOfficesCodeAndCity, 
-    //    getAllOfficesFromSpainCityAndMovil 
-    //} from "./module/offices.js";
+
+// import { 
+//        getAllOfficesCodeAndCity, 
+//        getAllOfficesFromSpainCityAndMovil 
+//     } from "./module/offices.js";
     
     //import { 
     //    getAllEmployeesWithBossAndCodeSeven,

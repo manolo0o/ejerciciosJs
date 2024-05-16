@@ -8,7 +8,11 @@ import {
     getAllNotAlreadyClientsPaymentsAndManagerOffices,
     getAllOfficeswithFuenlabradaClients,
     getAll,
-    getAllClientsWithALateDeliveryArrive
+    getAllClientsWithALateDeliveryArrive,
+    getAllClientsWhoHaventPaid,
+    getAllClientsWhoHaventRequest,
+    getAllClientsWhoHaveNeitherPaidNorRequest,
+    getAllClientsWhoHaveRequestedButHaventPaid
 } from "../module/clients.js";
 //import {
  //   getAllEmployNotClients 
@@ -32,7 +36,6 @@ export class Mycard extends HTMLElement{
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
-                            <p><b> Client Name: </b>${val.name}</p>
                             <p><b> Country: </b>${val.country}</p>
                         </div>
                     </div>
@@ -51,7 +54,6 @@ export class Mycard extends HTMLElement{
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
-                            <p><b>Nombre del Cliente: </b> ${val.client_name}</p>
                             <p><b>Codigo del Empleado: </b>${val.code_employee_sales_manager}</p>
                             <p><b>ciudad: </b>${val.city}</p>
                         </div>
@@ -70,7 +72,6 @@ export class Mycard extends HTMLElement{
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
-                            <p><b>Client Name: </b> ${val.client_name}</p>
                             <p><b>Manager Fullname: </b>${val.Manager_name}</p>
                         </div>
                     </div>
@@ -88,7 +89,6 @@ export class Mycard extends HTMLElement{
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
-                            <p><b>Client Name: </b> ${val.Client_name}</p>
                             <p><b>Manager Fullname: </b>${val.Manager_name}</p>
                         </div>
                     </div>
@@ -106,7 +106,6 @@ export class Mycard extends HTMLElement{
                     </div>
                         <div class="card__body">
                             <div class="body__marck">
-                                    <p><b>Client Name: </b> ${val.Client_name}</p>
                                     <p><b>Manager Fullname: </b>${val.Manager_name}</p>
                                     <p><b>payment: </b>not valid</p>
                                 </div>
@@ -125,7 +124,6 @@ export class Mycard extends HTMLElement{
                     </div>
                         <div class="card__body">
                             <div class="body__marck">
-                                    <p><b>Client Name: </b> ${val.Client_name}</p>
                                     <p><b>Manager Fullname: </b>${val.Manager_name}</p>
                                     <p><b>Manager_city: </b>${val.Manager_city}</p>
                                 </div>
@@ -140,11 +138,10 @@ export class Mycard extends HTMLElement{
             this.shadowRoot.innerHTML +=/*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.Client_name}</div>
+                        <div>${val.client_name}</div>
                     </div>
                         <div class="card__body">
                             <div class="body__marck">
-                                    <p><b>Client Name: </b> ${val.client_name}</p>
                                     <p><b>Manager Fullname: </b>${val.Manager_name}</p>
                                     <p><b>Manager city: </b>${val.city}</p>
                                 </div>
@@ -163,7 +160,6 @@ export class Mycard extends HTMLElement{
                     </div>
                         <div class="card__body">
                             <div class="body__marck">
-                                    <p><b>Client Name: </b> ${val.cliente}</p>
                                     <p><b>Manager Fullname: </b>${val.encargado}</p>
                                     <p><b>Office: </b>${val.oficina}</p>
                                     <p><b>Office adress: </b>${val.direccionOficina}</p>
@@ -183,7 +179,6 @@ export class Mycard extends HTMLElement{
                     </div>
                         <div class="card__body">
                             <div class="body__marck">
-                                    <p><b>Client Name: </b> ${val.client_name}</p>
                                     <p><b>Manager Fullname: </b>${val.employees_full_name}</p>
                                     <p><b>Office code: </b>${val.employees_office_code}</p>
                                     <p><b>city: </b>${val.city_client}</p>
@@ -203,7 +198,6 @@ export class Mycard extends HTMLElement{
                     </div>
                         <div class="card__body">
                             <div class="body__marck">
-                                    <p><b>Client Name: </b> ${val.Client_Name}</p>
                                     <p><b>Stimate date: </b>${val.diaEsperado}</p>
                                     <p><b>Delivery date:</b>${val.Fecha_Entregada}</p>
                                 </div>
@@ -212,6 +206,72 @@ export class Mycard extends HTMLElement{
                     `;
                 });
             }
+            static get observedAttributes() {
+                return ["logic"];
+            }
+    async getAllClientsWithALateDeliveryArrive(){
+        let data = await getAllClientsWithALateDeliveryArrive();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.Client_Name}</div>
+                    </div>
+                        <div class="card__body">
+                            <div class="body__marck">
+                                    <p><b>Stimate date: </b>${val.diaEsperado}</p>
+                                    <p><b>Delivery date:</b>${val.Fecha_Entregada}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+    async getAllClientsWhoHaventPaid(){
+        let data = await getAllClientsWhoHaventPaid();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name}</div>
+                    </div>
+                    `;
+                });
+            }
+    async getAllClientsWhoHaventRequest(){
+        let data = await getAllClientsWhoHaventRequest();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name}</div>
+                    </div>
+                    `;
+                });
+            }
+    async getAllClientsWhoHaveNeitherPaidNorRequest(){
+        let data = await getAllClientsWhoHaveNeitherPaidNorRequest();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name}</div>
+                    </div>
+                    `;
+                });
+            }
+    async getAllClientsWhoHaveRequestedButHaventPaid(){
+        let data = await getAllClientsWhoHaveRequestedButHaventPaid();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name}</div>
+                    </div>
+                    `;
+                });
+            }
+
             static get observedAttributes() {
                 return ["logic"];
             }
@@ -227,6 +287,9 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now== "client_8")this.getAllOfficeswithFuenlabradaClients()   
         if(name=="logic" && now== "client_9")this.getAll()
         if(name=="logic" && now== "client_10")this.getAllClientsWithALateDeliveryArrive()
-        
+        if(name=="logic" && now== "client_11")this.getAllClientsWhoHaventPaid()
+        if(name=="logic" && now== "client_12")this.getAllClientsWhoHaventRequest()
+        if(name=="logic" && now== "client_13")this.getAllClientsWhoHaveNeitherPaidNorRequest()
+        if(name=="logic" && now== "client_14")this.getAllClientsWhoHaveRequestedButHaventPaid()
     }
 }

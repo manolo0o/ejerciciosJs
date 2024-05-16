@@ -64,3 +64,11 @@ export const getPaymentByClientCode = async (code = "") => {
     let data = await res.json();
     return data;
 }
+
+//Funcion para ver los clientes que han realizado pagos.
+export const getAllClientsWhoPaid = async (code) => {
+    let res = await fetch(`http://localhost:5505/payments?code_client=${code}`)
+    let data = await res.json();
+    return data;
+
+}
