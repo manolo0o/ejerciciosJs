@@ -5,7 +5,7 @@ export const getAllOficceAndCodeCity = async()=>{
     let data = await res.json();
     let dataUpdate = data.map(val =>{
         return {
-            code_office: val.code_office,
+            code: val.code_office,
             city: val.city
         }
     })
@@ -33,7 +33,7 @@ export const getOfficesByCode = async (code) => {
 
 //6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
 export const getAllOfficesAddressWithClientsInFuenlabrada = async () => {
-    let res = await fetch("http://172.16.101.146:5504/offices")
+    let res = await fetch("http://localhost:5504/offices")
     let offices = await res.json();
     let dataUpdate = [];
     for (let i = 0; i < offices.length; i++) {

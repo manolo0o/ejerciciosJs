@@ -14,9 +14,26 @@ import {
     getAllClientsWhoHaveNeitherPaidNorRequest,
     getAllClientsWhoHaveRequestedButHaventPaid
 } from "../module/clients.js";
-//import {
- //   getAllEmployNotClients 
-//} from "../module/employees.js";
+
+import {
+    getAllEmployeesThatArentAssociatedWithAnyClientAndHisBossName,
+    getAllEmployeesThatArentAssociatedWithAnyClientOrOffice,
+    getAllEmployeesThatArentAssociatedWithAnyClientAndDataOfHisOffice,
+    getAllFullNameAndEmailsAndBoss,
+    getBossFullNameAndEmail,
+    getAllFullNamePositionDiferentSalesRepresentative,
+    getAllEmployeesAndBossesNames,
+    getAllEmployeesWithBossNameAndTheBossesNames,
+    getAllEmployeesThatDontHaveOffice,
+    getAllEmployeesThatArentAssociatedWithAnyClient,
+} from "../module/employees.js";
+
+
+import{
+    getAllOficceAndCodeCity,
+    getAllOficceCityAndMovil,
+    getAllOfficesAddressWithClientsInFuenlabrada,
+} from "../module/office.js" 
 
 export class Mycard extends HTMLElement{
     constructor(){
@@ -271,6 +288,171 @@ export class Mycard extends HTMLElement{
                     `;
                 });
             }
+    async getAllFullNameAndEmailsAndBoss(){
+        let data = await getAllFullNameAndEmailsAndBoss();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML +=/*hmtl*/`
+            <div class="report__card">
+            <div class="card__title">
+                <div>${val.name}</div>
+            </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                            <p><b>Lat Names: </b>${val.fullLastname}</p>
+                            <p><b>Email:</b> ${val.email}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    async getBossFullNameAndEmail (){
+        let data = await getBossFullNameAndEmail();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML+=/*html*/`
+            <div class="report__card">
+            <div class="card__title">
+                <div>${val.name} ${val.fullLastname}</div>
+            </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                            <p><b>position: </b>${val.position}</p>
+                            <p><b>Email:</b> ${val.email}</p>
+                        </div>
+                    </div>
+                </div>
+            `
+        });
+    }
+
+    async getAllFullNamePositionDiferentSalesRepresentative(){
+        let data = await getAllFullNamePositionDiferentSalesRepresentative();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML+=/*html*/`
+            <div class="report__card">
+            <div class="card__title">
+                <div>${val.name} ${val.fullLastname}</div>
+            </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                            <p><b>position: </b>${val.position}</p>
+                        </div>
+                    </div>
+                </div>
+            `
+        });
+    }
+    async getAllEmployeesAndBossesNames (){
+        let data = await getAllEmployeesAndBossesNames();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML+=/*html*/`
+            <div class="report__card">
+            <div class="card__title">
+                <div>${val.Empleado}</div>
+            </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                            <p><b>Boss: </b>${val.JefeACargo}</p>
+                        </div>
+                    </div>
+                </div>
+            `
+        });
+    }
+    
+    async getAllEmployeesWithBossNameAndTheBossesNames(){
+        let data = await getAllEmployeesWithBossNameAndTheBossesNames();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML+=/*html*/`
+            <div class="report__card">
+            <div class="card__title">
+                <div>Employee name and his direct boss name and the principal boss names.</div>
+            </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                            <p><b>Employee: </b>${val.Empleado}</p>
+                            <p><b>Direct boss: </b>${val.JefeACargo}</p>
+                            <p><b>Principal boss: </b>${val.JefeDeJefe}</p> 
+                        </div>
+                    </div>
+                </div>
+            `
+        });
+    }
+
+    async getAllEmployeesThatDontHaveOffice(){
+        let data = await getAllEmployeesThatDontHaveOffice();
+        data.forEach(val=>{ 
+            this.shadowRoot.innerHTML/*html*/`
+            <div class="report__card">
+            <div class="card__title">
+                <div>${val.code_office}</div>
+            </div>
+            `
+        });
+    }
+
+    async getAllEmployeesThatArentAssociatedWithAnyClientDesign(){
+        let data = await getAllEmployeesThatArentAssociatedWithAnyClient();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML/*HTML*/`
+            <div class="report__card">
+                <div class="card__title">
+                    <div>Empleados que no tienen un cliente asociado</div>
+                </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                        <p><b>Id: </b> ${val.id}</p>
+                        <p><b>Cargo: </b>${val.position}</p>
+                        <p><b>Oficina: </b>${val.code_office}</p>
+                        <p><b>Numero de extencion: </b>${val.extension}</p>
+                        <p><b>Correo electronico: </b>${val.email}</p>
+                        <p><b>Codigo de jefe: </b>${val.code_boss}</p>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+    }
+
+    async getAllOficceAndCodeCity(){
+        let data = await getAllOficceAndCodeCity();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML+=/*html*/`
+            <div class="report__card">
+            <div class="card__title">
+                <div>Office code and cities with no offices.</div>
+            </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                            <p><b>City : </b>${val.city}</p>
+                            <p><b>Office code : </b>${val.code}</p>                           
+                        </div>
+                    </div>
+                </div>
+            `
+        });
+    }
+    async getAllOficceCityAndMovil(){
+        let data = await getAllOficceCityAndMovil();
+        data.forEach(val=>{
+            this.shadowRoot.innerHTML+=/*html*/`
+            <div class="report__card">
+            <div class="card__title">
+                <div>City & number from spain offices.</div>
+            </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                            <p><b>City: </b>${val.code_office}</p>
+                            <p><b>Phone#: </b>${val.movil}</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            `
+        });
+    }
 
             static get observedAttributes() {
                 return ["logic"];
@@ -291,5 +473,24 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now== "client_12")this.getAllClientsWhoHaventRequest()
         if(name=="logic" && now== "client_13")this.getAllClientsWhoHaveNeitherPaidNorRequest()
         if(name=="logic" && now== "client_14")this.getAllClientsWhoHaveRequestedButHaventPaid()
+
+
+        if(name=="logic" && now== "employ_1")this.getAllFullNameAndEmailsAndBoss()
+        if(name=="logic" && now== "employ_2")this.getBossFullNameAndEmail()
+        if(name=="logic" && now== "employ_3")this.getAllFullNamePositionDiferentSalesRepresentative()
+        if(name=="logic" && now== "employ_4")this.getAllEmployeesAndBossesNames()
+        if(name=="logic" && now== "employ_5")this.getAllEmployeesWithBossNameAndTheBossesNames()
+        if(name=="logic" && now== "employ_6")this.getAllEmployeesThatDontHaveOffice()
+        if(name=="logic" && now== "employ_7")this.getAllEmployeesThatArentAssociatedWithAnyClientDesign()
+        if(name=="logic" && now== "employ_8")this.getAllEmployeesThatArentAssociatedWithAnyClientAndHisBossName()
+        if(name=="logic" && now== "employ_9")this.getAllEmployeesThatArentAssociatedWithAnyClientOrOffice()
+        if(name=="logic" && now== "employ_10")this.getAllEmployeesThatArentAssociatedWithAnyClientAndDataOfHisOffice()
+
+        
+        if(name=="logic" && now== "ofice_1")this.getAllOficceAndCodeCity()
+        if(name=="logic" && now== "ofice_2")this.getAllOficceCityAndMovil()
+        if(name=="logic" && now== "ofice_3")this.getAllOfficesAddressWithClientsInFuenlabrada()
     }
 }
+
+

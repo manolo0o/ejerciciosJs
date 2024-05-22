@@ -15,18 +15,29 @@ import {
     getAllClientsWhoHaveRequestedButHaventPaid
 } from "./module/clients.js";
 
-console.log(await getAllClientsWhoHaveRequestedButHaventPaid()); 
+/* console.log(await getAllClientsWhoHaveRequestedButHaventPaid());  */
+
+import {
+    //--getAllEmployeesThatArentAssociatedWithAnyClientAndHisBossName,---//
+    //--getAllEmployeesThatArentAssociatedWithAnyClientOrOffice,--//
+    //--getAllEmployeesThatArentAssociatedWithAnyClientAndDataOfHisOffice,--//
+    getAllFullNameAndEmailsAndBoss,
+    getBossFullNameAndEmail,
+    getAllFullNamePositionDiferentSalesRepresentative,
+    getAllEmployeesAndBossesNames,
+    getAllEmployeesWithBossNameAndTheBossesNames,
+    getAllEmployeesThatDontHaveOffice,
+    getAllEmployeesThatArentAssociatedWithAnyClient,
+} from "./module/employees.js"
+
+console.log(await getAllEmployeesAndBossesNames()); 
 
 
-// import { 
-//        getAllOfficesCodeAndCity, 
-//        getAllOfficesFromSpainCityAndMovil 
-//     } from "./module/offices.js";
-    
-    //import { 
-    //    getAllEmployeesWithBossAndCodeSeven,
-    //    getBossFullNameAndEmail,
-    //    getAllEmployeesNotSalesReps,
-    //    getAll3,
-    //    getAll
-    //} from "./module/employees.js";
+import{
+    getAllOficceAndCodeCity,
+    getAllOficceCityAndMovil,
+    getAllOfficesAddressWithClientsInFuenlabrada,
+} from "./module/office.js"
+
+console.log(await getAllOficceCityAndMovil()); 
+
