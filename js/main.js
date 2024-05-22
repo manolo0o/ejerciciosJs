@@ -15,7 +15,7 @@ import {
     getAllClientsWhoHaveRequestedButHaventPaid
 } from "./module/clients.js";
 
-console.log(await getAllClientsWhoHaventRequest()); 
+console.log(await getAllClientsWhoHaveRequestedButHaventPaid()); 
 
 
 // import { 
