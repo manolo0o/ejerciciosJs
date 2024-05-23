@@ -3,7 +3,7 @@
 // 7.Devuelve un listado con los distintos estados por los que puede pasar un pedido.
 
 export const getAllStatus = async() =>{
-    let res = await fetch("http://localhost:5507/requests")
+    let res = await fetch("http://172.16.101.146:5598/requests")
     let data = await res.json();
     let uniqueStatusMethods = new Set();
     data.forEach(val => {
@@ -18,7 +18,7 @@ export const getAllStatus = async() =>{
 // 9.Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos que no han sido entregados a tiempo.
 
 export const getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime = async () =>{
-    let res = await fetch("http://localhost:5507/requests?status=Entregado")
+    let res = await fetch("http://172.16.101.146:5598/requests?status=Entregado")
     let data = await res.json();
     let overDueOrders = [];
     data.forEach(order => { 
@@ -40,7 +40,7 @@ export const getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime = 
 // al menos dos días antes de la fecha esperada.
 
 export const getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore = async () =>{
-    let res = await fetch ("http://localhost:5507/requests?status=Entregado")
+    let res = await fetch ("http://172.16.101.146:5598/requests?status=Entregado")
     let data = await res.json();
     let dataUpdate = [];
     data.forEach( val=>{
@@ -68,7 +68,7 @@ export const getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore = async 
 //11. Devuelve un listado de todos los pedidos que fueron rechazados en 2009.
 
 export const getAllRefusedRequest_In2009 = async () =>{
-    let res = await fetch("http://localhost:5507/requests?status=Rechazado")
+    let res = await fetch("http://172.16.101.146:5598/requests?status=Rechazado")
     let data = await res.json();
     let rejectedOrders = data.filter(order =>{
         let year = new Date(order.date_request).getFullYear();
@@ -82,7 +82,7 @@ export const getAllRefusedRequest_In2009 = async () =>{
 // 12. Devuelve un listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año.
 
 export const getAll_Request_From_January  = async () =>{
-    let res = await fetch("http://localhost:5507/requests?status=Entregado")
+    let res = await fetch("http://172.16.101.146:5598/requests?status=Entregado")
     let data = await res.json();
     let deliveriedOrders = data.filter(order =>{
         let month = new Date(order.date_delivery).getMonth();
@@ -93,12 +93,12 @@ export const getAll_Request_From_January  = async () =>{
 
 // 10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
 export const getAllClientsWhoRecievedLateAProduct = async () => {
-    let res = await fetch("http://localhost:5507/requests?status=Entregado");
+    let res = await fetch("http://172.16.101.146:5598/requests?status=Entregado");
     let dataRequest = await res.json();
     let dataClients = [];
 
     // Obtener todos los clientes
-    let clientsRes = await fetch("http://localhost:5507/requests");
+    let clientsRes = await fetch("http://172.16.101.146:5598/requests");
     let clientsData = await clientsRes.json();
     let clientsMap = new Map(clientsData.map(client => [client.client_code, client.client_name]));
 
@@ -122,13 +122,13 @@ export const getAllClientsWhoRecievedLateAProduct = async () => {
 
 //Obtener el estado de un pedido mediante el codigo de su cliente
 export const getAllOrdersByClientCode = async(code = "")=>{
-    let res = await fetch(`http://localhost:5507/requests?code_client=${code}`).then(res => res.json());
+    let res = await fetch(`http://172.16.101.146:5598/requests?code_client=${code}`).then(res => res.json());
     return res
 }
 
 
 export const getAllClientsWhoRequest = async (code) => {
-    let res = await fetch(`http://localhost:5507/requests?code_client=${code}`)
+    let res = await fetch(`http://172.16.101.146:5598/requests?code_client=${code}`)
     let data = await res.json();
     return data;
 }

@@ -1,7 +1,7 @@
 // 1. Devuelve un listado con el código de oficina y la ciudad 
 // donde hay oficinas.
 export const getAllOficceAndCodeCity = async()=>{
-    let res = await fetch("http://localhost:5504/offices")
+    let res = await fetch("http://172.16.101.146:5595/offices")
     let data = await res.json();
     let dataUpdate = data.map(val =>{
         return {
@@ -13,7 +13,7 @@ export const getAllOficceAndCodeCity = async()=>{
 }
 // 2. Devuelve un listado con la ciudad y el teléfono de las oficinas de España.
 export const getAllOficceCityAndMovil = async()=>{
-    let res = await fetch("http://localhost:5504/offices?country=España")
+    let res = await fetch("http://172.16.101.146:5595/offices?country=España")
     let data = await res.json();
     let dataUpdate = data.map(val =>{
         return {
@@ -26,14 +26,14 @@ export const getAllOficceCityAndMovil = async()=>{
 
 // Obtener toda la informacion de la oficina por codigo
 export const getOfficesByCode = async (code) => {
-    let res = await fetch(`http://localhost:5504/offices?code_office=${code}`)
+    let res = await fetch(`http://172.16.101.146:5595/offices?code_office=${code}`)
     let data = await res.json();
     return data
 }
 
 //6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
 export const getAllOfficesAddressWithClientsInFuenlabrada = async () => {
-    let res = await fetch("http://localhost:5504/offices")
+    let res = await fetch("http://172.16.101.146:5595/offices")
     let offices = await res.json();
     let dataUpdate = [];
     for (let i = 0; i < offices.length; i++) {

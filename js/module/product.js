@@ -5,7 +5,7 @@ import { getAllRequestDetailsByCode } from "./request_details.js"
 // de venta, mostrando en primer lugar los de mayor precio.
 
 export const getAll_OrnamentalProducts = async() => {
-    let res = await fetch ("http://localhost:5506/products?gama=Ornamentales&stock_gt=100");
+    let res = await fetch ("http://172.16.101.146:5597/products?gama=Ornamentales&stock_gt=100");
     let data = await res.json();
     let dataUpdate = data.sort((a,b) =>{
         return b.price_sale - a.price_sale
@@ -15,7 +15,7 @@ export const getAll_OrnamentalProducts = async() => {
 
 //8. Devuelve un listado de los productos que nunca han aparecido en un pedido.
 export const getAllProductsThatNeverHasBeenRequested = async () => {
-    let res = await fetch("http://localhost:5506/products")
+    let res = await fetch("http://172.16.101.146:5597/products")
     let data = await res.json();
     let dataUpdate = [];
     for (let i = 0; i < data.length; i++) {
@@ -28,7 +28,7 @@ export const getAllProductsThatNeverHasBeenRequested = async () => {
 //9. Devuelve un listado de los productos que nunca han aparecido en un pedido.
 //El resultado debe mostrar el nombre, la descripción y la imagen del producto.
 export const getAllProductsThatNeverHasBeenRequestedWithItsNDI = async () => {
-    let res = await fetch("http://localhost:5506/products")
+    let res = await fetch("http://172.16.101.146:5597/products")
     const data = await res.json();
     let dataUpdate = [];
     for (let i = 0; i < data.length; i++) {
@@ -45,13 +45,13 @@ export const getAllProductsThatNeverHasBeenRequestedWithItsNDI = async () => {
 
 //obtener los productos por codigo
 export const getAllProductsByCode = async (code_product) => {
-    let res = await fetch(`http://localhost:5506/products?code_product=${code_product}`)
+    let res = await fetch(`http://172.16.101.146:5597/products?code_product=${code_product}`)
     let data = await res.json();
     return data;
 }
 
 export const getProductByCode = async (code = '') => {
-    let res = await fetch("http://localhost:5506/products?code_product=${code}")
+    let res = await fetch("http://172.16.101.146:5597/products?code_product=${code}")
     let data = await res.json()
     return data
 }

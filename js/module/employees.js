@@ -3,7 +3,7 @@ import{ getAllOffices } from "./office.js" */
 // 3. Devuelve un listado con el nombre, apellidos y email de los empleados 
 // cuyo jefe tiene un código de jefe igual a 7.
 export const getAllFullNameAndEmailsAndBoss = async() =>{
-    let res = await fetch("http://localhost:5502/employee?code_boss=7")
+    let res = await fetch("http://172.16.101.146:5594/employee?code_boss=7")
     let data = await res.json();
     let dataUpdate = data.map(val=>{
         return {
@@ -17,7 +17,7 @@ export const getAllFullNameAndEmailsAndBoss = async() =>{
 // 4. Devuelve el nombre del puesto, nombre, apellidos y
 //  email del jefe de la empresa.
 export const getBossFullNameAndEmail = async() =>{
-    let res=await fetch("http://localhost:5502/employee")
+    let res=await fetch("http://172.16.101.146:5594/employee")
     let data =await res.json();
     let dataUpdate = []
     data.forEach(val=>{
@@ -38,7 +38,7 @@ export const getBossFullNameAndEmail = async() =>{
 //puesto de aquellos empleados que no sean representantes de ventas.
 
 export const getAllFullNamePositionDiferentSalesRepresentative = async() =>{
-    let res=await fetch("http://localhost:5502/employee?position_ne=Representante Ventas")
+    let res=await fetch("http://172.16.101.146:5594/employee?position_ne=Representante Ventas")
     let data =await res.json();
     let dataUpdate = []
     data.forEach(val => {
@@ -55,14 +55,14 @@ export const getAllFullNamePositionDiferentSalesRepresentative = async() =>{
 
 // Obtener toda la informacion del empleado por codigo
 export const getEmployeesByCode = async(code)=>{
-    let res = await fetch (`http://localhost:5502/employee?employee_code=${code}`)
+    let res = await fetch (`http://172.16.101.146:5594/employee?employee_code=${code}`)
     let data = await res.json();
     return data
 }
 
 //8. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes.
 export const getAllEmployeesAndBossesNames = async () => {
-    let res = await fetch('http://localhost:5502/employee').then(res => res.json());
+    let res = await fetch('http://172.16.101.146:5594/employee').then(res => res.json());
     let dataUpdate = res.map(async (val) => {
         if (val.code_boss == null) {
             return { Director_general: `${val.name} ${val.lastname1} ${val.lastname2}` };
@@ -80,7 +80,7 @@ export const getAllEmployeesAndBossesNames = async () => {
 //9. Devuelve un listado que muestre el nombre de cada empleados,
 //el nombre de su jefe y el nombre del jefe de sus jefe.
 export const getAllEmployeesWithBossNameAndTheBossesNames = async () => {
-    let res = await fetch('http://localhost:5502/employee').then(res => res.json());
+    let res = await fetch('http://172.16.101.146:5594/employee').then(res => res.json());
     let dataUpdate = res.map(async (val) => {
         if (val.code_boss == null) return { Director_general: `${val.name} ${val.lastname1} ${val.lastname2}` };
         let [boss] = await getEmployeesByCode(val.code_boss);
@@ -100,7 +100,7 @@ export const getAllEmployeesWithBossNameAndTheBossesNames = async () => {
 
 //4. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada.
 export const getAllEmployeesThatDontHaveOffice = async () => {
-    let res = await fetch("http://localhost:5502/employee")
+    let res = await fetch("http://172.16.101.146:5594/employee")
     let dataEmployees = await res.json();
     let dataUpdate = [];
     dataEmployees.forEach(val => {
@@ -112,11 +112,11 @@ export const getAllEmployeesThatDontHaveOffice = async () => {
 //5. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado.
 export const getAllEmployeesThatArentAssociatedWithAnyClient = async () => {
     // Obtener los datos de los empleados
-    let resEmployees = await fetch("http://localhost:5502/employee");
+    let resEmployees = await fetch("http://172.16.101.146:5594/employee");
     let employees = await resEmployees.json();
 
     // Obtener los datos de los clientes
-    let resClients = await fetch("http://localhost:5502/employee"); 
+    let resClients = await fetch("http://172.16.101.146:5594/employee"); 
     let clients = await resClients.json();
 
     let dataUpdate = [];
@@ -175,7 +175,7 @@ export const getAllEmployeesThatArentAssociatedWithAnyClientAndDataOfHisOffice =
 
 //7. Devuelve un listado que muestre los empleados que no tienen una oficina asociada y los que no tienen un cliente asociado.
 export const getAllEmployeesThatArentAssociatedWithAnyClientOrOffice = async () => {
-    let res = await fetch("http://localhost:5502/employee")
+    let res = await fetch("http://172.16.101.146:5594/employee")
     let data = await res.json();
     let dataUpdate = [];
     for (let i = 0; i < data.length; i++) {
@@ -190,7 +190,7 @@ export const getAllEmployeesThatArentAssociatedWithAnyClientOrOffice = async () 
 
 //obtener todos los empleados
 export const getAllEmployee = async () => {
-    let res = await fetch("http://localhost:5502/employee")
+    let res = await fetch("http://172.16.101.146:5594/employee")
     let data = await res.json();
     return data;
 }
