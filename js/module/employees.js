@@ -116,7 +116,7 @@ export const getAllEmployeesThatArentAssociatedWithAnyClient = async () => {
     let employees = await resEmployees.json();
 
     // Obtener los datos de los clientes
-    let resClients = await fetch("http://localhost:5502/"); 
+    let resClients = await fetch("http://localhost:5502/employee"); 
     let clients = await resClients.json();
 
     let dataUpdate = [];

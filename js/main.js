@@ -30,7 +30,7 @@ import {
     getAllEmployeesThatArentAssociatedWithAnyClient,
 } from "./module/employees.js"
 
-console.log(await getAllEmployeesAndBossesNames()); 
+// console.log(await getAllEmployeesThatArentAssociatedWithAnyClient()); 
 
 
 import{
@@ -39,5 +39,31 @@ import{
     getAllOfficesAddressWithClientsInFuenlabrada,
 } from "./module/office.js"
 
-console.log(await getAllOficceCityAndMovil()); 
+//console.log(await getAllOfficesAddressWithClientsInFuenlabrada()); 
 
+import{
+    getClientPayments_At_2008,
+    getAllpaypal2008payments,
+    getAll_Type_Of_Payments
+}   from "./module/payments.js"
+
+// console.log(await getAll_Type_Of_Payments()); 
+
+import{
+    getAll_OrnamentalProducts,
+    getAllProductsThatNeverHasBeenRequested,
+    getAllProductsThatNeverHasBeenRequestedWithItsNDI,
+} from "./module/product.js"
+
+// console.log(await getAllProductsThatNeverHasBeenRequestedWithItsNDI()); 
+
+
+import{
+    getAllStatus,
+    getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime,
+    getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore,
+    getAllRefusedRequest_In2009,
+    getAll_Request_From_January
+} from "./module/request.js"
+
+// console.log(await getAll_Request_From_January()); 
