@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "npm run clients & npm run employee & npm run product & npm run office & npm run payments & npm run request & npm run delivery_details ",
-    "clients": "json-server js/db/clients.json -p 5593 -h 172.16.101.146 ",
+    "clients": "json-server js/db/clients.json -p 5600 -h 172.16.101.146 ",
     "employee": "json-server js/db/employees.json -p 5594 -h 172.16.101.146 ",
     "gama": "json-server js/db/gama.json -p 5503 ",
     "office": "json-server js/db/office.json -p 5595 -h 172.16.101.146",
