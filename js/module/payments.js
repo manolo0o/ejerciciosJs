@@ -4,7 +4,7 @@
 // aquellos códigos de cliente que aparezcan repetidos. Resuelva la consulta:
 
 export const getClientPayments_At_2008 = async () =>{
-    let res = await fetch ("http://172.16.101.146:5596/payments")
+    let res = await fetch ("http://172.16.101.146:5863/payments")
     let data = await res.json();
     let dataUpdate = []
     let clientCodesSet = new Set();
@@ -24,7 +24,7 @@ export const getClientPayments_At_2008 = async () =>{
 // año 2008 mediante Paypal. Ordene el resultado de mayor a menor.
 
 export const getAllpaypal2008payments = async() =>{
-    let res = await fetch("http://172.16.101.146:5596/payments?payment=PayPal")
+    let res = await fetch("http://172.16.101.146:5863/payments?payment=PayPal")
     let data = await res.json();
     let dataUpdate = [];
     data.forEach(val => {
@@ -48,7 +48,7 @@ export const getAllpaypal2008payments = async() =>{
 //  Tenga en cuenta que no deben aparecer formas de pago repetidas.
 
 export const getAll_Type_Of_Payments = async() =>{
-    let res = await fetch("http://172.16.101.146:5596/payments")
+    let res = await fetch("http://172.16.101.146:5863/payments")
     let data = await res.json();
     let uniqueStatusMethods = new Set();
     data.forEach(val =>{
@@ -60,14 +60,14 @@ export const getAll_Type_Of_Payments = async() =>{
 
 //Obtener el pago de algun cliente mediante codigo
 export const getPaymentByClientCode = async (code = "") => {
-    let res = await fetch(`http://172.16.101.146:5596/payments?code_client=${code}`);
+    let res = await fetch(`http://172.16.101.146:5863/payments?code_client=${code}`);
     let data = await res.json();
     return data;
 }
 
 //Funcion para ver los clientes que han realizado pagos.
 export const getAllClientsWhoPaid = async (code) => {
-    let res = await fetch(`http://172.16.101.146:5596/payments?code_client=${code}`)
+    let res = await fetch(`http://172.16.101.146:5863/payments?code_client=${code}`)
     let data = await res.json();
     return data;
 

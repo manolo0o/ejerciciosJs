@@ -10,7 +10,7 @@
     "employee": "json-server js/db/employees.json -p 5594 -h 172.16.101.146 ",
     "gama": "json-server js/db/gama.json -p 5503 ",
     "office": "json-server js/db/office.json -p 5595 -h 172.16.101.146",
-    "payments": "json-server js/db/payments.json 5596 -h 172.16.101.146 ",
+    "payments": "json-server js/db/payments.json 5863 -h 172.16.101.146 ",
     "product": "json-server js/db/product.json -p 5597 -h 172.16.101.146 ",
     "request": "json-server js/db/request.json -p 5598 -h 172.16.101.146 ",
     "delivery_details": " json-server js/db/delivery_details.json -p 5599 -h 172.16.101.146"
